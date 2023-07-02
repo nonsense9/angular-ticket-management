@@ -1,0 +1,13 @@
+<ng-container *ngIf="tickets$.length > 0; else loading">
+  <div>
+    <div>
+      <h2>Tickets</h2>
+      <ul class="p-0">
+        <li *ngFor="let ticket of tickets$" id="ticket-list">
+          <a [routerLink]="['/tickets', ticket.id]">{{ticket.description}}</a></li>
+      </ul>
+    </div>
+  </div>
+</ng-container>
+<ng-template #loading>....loading</ng-template>
+
