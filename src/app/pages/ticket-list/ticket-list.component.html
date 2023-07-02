@@ -1,13 +1,82 @@
-<ng-container *ngIf="tickets$.length > 0; else loading">
-  <div>
-    <div>
-      <h2>Tickets</h2>
-      <ul class="p-0">
-        <li *ngFor="let ticket of tickets$" id="ticket-list">
-          <a [routerLink]="['/tickets', ticket.id]">{{ticket.description}}</a></li>
-      </ul>
+<!--Ticket list template-->
+<ng-container *ngIf="tickets$ | async as tickets">
+  <form [formGroup]="profileForm"
+        (ngSubmit)="handleAddTicket(profileForm.value.description, profileForm.value.user.name)">
+    <div class="row">
+      <div *ngIf="tickets.length > 0; else noTickets" class="col-lg-9">
+        <div class="btn-group">
+          <button class="btn btn-outline-primary" (click)="filterByStatus(ticketStatus.COMPLETED)" type="button">
+            Completed
+          </button>
+          <button class="btn btn-outline-primary" (click)="filterByStatus(ticketStatus.UNCOMPLETED)" type="button">
+            Uncompleted
+          </button>
+          <button class="btn btn-outline-primary" (click)="filterByStatus(ticketStatus.ALL)" type="button">
+            All
+          </button>
+        </div>
+        <h2 class="my-3">Tickets</h2>
+        <ul class="p-0">
+          <li *ngFor="let ticket of tickets" id="ticket-list" class="mb-2">
+            <a [routerLink]="['/tickets', ticket.id]">{{ticket.description}}</a>
+            <button class="btn btn-primary mx-2" (click)="complete(ticket.id)" type="button">
+              <i class="bi bi-check2-circle"></i>
+              Complete
+            </button>
+            <button class="btn btn-primary mx-2" (click)="remove(ticket.id)" type="button">
+              <i class="bi bi-x-circle text-secondary"></i>
+              Remove
+            </button>
+            <app-status [status]="ticket.completed"></app-status>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <div class="form-group">
+          <label class="form-label" for="newUser">Introduce name for new user</label>
+          <input class="form-control" formControlName="newUser" id="newUser"/>
+          <div class="mt-2">
+            <button type="button" class="btn btn-primary w-100" (click)="addUser()">Add user</button>
+          </div>
+        </div>
+        <div class="form-group my-3">
+          <label class="form-label" for="description">Introduce description for new ticket</label>s
+          <input class="form-control" formControlName="description" id="description"/>
+          <div
+            *ngIf="showValidationErrorMessage('description')">
+            <p class="text-secondary">Minimum length are 6 digits</p>
+            <p class="text-secondary">Only letters are accepted</p>
+          </div>
+        </div>
+        <ng-container *ngIf="users$ | async as users">
+          <div *ngIf="users.length > 0" class="form-group">
+            <label class="form-label" for="name">
+              Select a user you want to assign to
+            </label>
+            <div>
+              <div formGroupName="user">
+                <select class="form-select" formControlName="name" id="name">
+                  <option *ngFor="let user of users">
+                    <span>{{user.name}}</span>
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-2">
+              <button type="submit" class="btn btn-primary w-100" [disabled]="profileForm.invalid">Add ticket</button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
     </div>
-  </div>
+  </form>
 </ng-container>
-<ng-template #loading>....loading</ng-template>
 
+<!--No tickets in the list template-->
+<ng-template #noTickets>
+  <h1>Unfortunately, there are no tickets created at this time, create
+    one</h1>
+</ng-template>
+
+<!--Loading template-->
+<div *ngIf="tickets$ === null">....loading</div>

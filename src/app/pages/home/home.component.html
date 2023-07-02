@@ -1,0 +1,6 @@
+<div class="vh-100 d-flex justify-content-center align-items-center">
+  <div class="btn-group gap-2">
+    <button class="btn btn-primary" (click)="login()" [disabled]="auth.authenticated">Log In</button>
+    <button class="btn btn-primary" (click)="logout()" [disabled]="!auth.authenticated">Logout</button>
+  </div>
+</div>

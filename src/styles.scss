@@ -1,5 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 /* Specify box sizing */
+@import "app/assets/theme/theme";
+@import "bootstrap/scss/bootstrap.scss";
+@import "node_modules/angular-calendar/css/angular-calendar.css";
+
+.cursor-loader {
+  cursor: wait;
+  * {
+    cursor: wait !important;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -79,4 +90,3 @@ select {
 }
 
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
