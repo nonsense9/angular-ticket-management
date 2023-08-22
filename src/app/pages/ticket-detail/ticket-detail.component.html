@@ -1,8 +1,17 @@
 <div *ngIf="ticket">
   <div class="mt-5 d-flex flex-column justify-content-center align-items-center">
-    <div><p>Ticket ID: {{ticket.id}}</p></div>
+    <div><h2>Ticket</h2></div>
+    <div><p>ID: {{ticket.id}}</p></div>
     <div><p>Description: {{ticket.description}}</p></div>
-    <div><p>Status: {{ticket.completed}}</p></div>
-    <div><button routerLink="/" class="btn btn-outline-primary">Back to list</button></div>
+    <div>
+      <p>Status:
+        <app-status [status]="ticket.completed"/>
+      </p>
+    </div>
+    <div class="d-flex gap-3">
+      <button routerLink="/tickets" class="btn btn-outline-primary">Back to list</button>
+      <button class="btn btn-outline-primary" (click)="remove(ticket.id)">Remove</button>
+      <button class="btn btn-primary" (click)="complete(ticket.id)">Complete</button>
+    </div>
   </div>
 </div>
