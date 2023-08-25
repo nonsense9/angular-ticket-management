@@ -26,41 +26,53 @@ import {DictionaryComponent} from './pages/dictionary/dictionary.component';
 import {DictionaryService} from "./service/dictionary.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+import {ActionReducerMap, StoreModule} from "@ngrx/store";
+import {dictionaryReducer} from "./store/reducers/dictionary.reducer";
 
+import {MetaReducer} from "@ngrx/store";
+import {hydrationMetaReducer} from "./store/reducers/hydration.reducer";
+import {State} from "./store/models/state.model";
+
+export const reducers: ActionReducerMap<State> = {
+// @ts-ignore
+    dictionary: dictionaryReducer
+}
+export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TicketListComponent,
-    TicketDetailComponent,
-    StatusComponent,
-    HomeComponent,
-    CalendarComponent,
-    HeaderComponent,
-    FooterComponent,
-    DictionaryComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    NgbModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right',
-    }),
-  ],
-  providers: [AuthenticationService, DictionaryService, LoadingService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: LoadingInterceptor,
-    multi: true
-  }],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        TicketListComponent,
+        TicketDetailComponent,
+        StatusComponent,
+        HomeComponent,
+        CalendarComponent,
+        HeaderComponent,
+        FooterComponent,
+        DictionaryComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        NgbModule,
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory
+        }),
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            positionClass: 'toast-bottom-right',
+        }),
+        StoreModule.forRoot(reducers, {metaReducers})
+    ],
+    providers: [AuthenticationService, DictionaryService, LoadingService, {
+        provide: HTTP_INTERCEPTORS,
+        useClass: LoadingInterceptor,
+        multi: true
+    }],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
