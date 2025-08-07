@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ApiService, Ticket} from "./service/service";
-import {Observable, Observer} from "rxjs";
+import { Component } from '@angular/core';
+import {LoadingService} from "./service/loader.service";
 
 @Component({
   selector: 'app-root',
@@ -8,6 +7,7 @@ import {Observable, Observer} from "rxjs";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  constructor(public loadingService: LoadingService) {}
 
 
 }
