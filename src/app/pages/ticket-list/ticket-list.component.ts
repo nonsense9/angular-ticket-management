@@ -14,7 +14,25 @@ export class TicketListComponent implements OnInit {
   tickets$: Observable<Ticket[] | null> = null;
   users$: Observable<User[] | null> = null;
   ticketStatus = TicketStatus;
-
+  tableData = [{
+    miles: [20,3213,321],
+    files: 20,
+    piles: 20,
+    id: 20,
+    cxzc: 20,
+    cxzcxz: 20,
+    cxcxcxzcxz: 20,
+    cvbbcvbcvcvbbcv: 20,
+    xz: 20,
+    bvbcvcvbbcvbcv: 20,
+    bbcvbcvbcv: 20,
+    bvcbcvbcvbcv: 20,
+    cbvbbcvbcvbvc: 20,
+    bvcbcv: 20,
+    xzcxzcxzcxzxx: 20,
+    bvcbvcbcv: 20,
+    bcvbcvbcvbcvb: 20,
+  }]
   profileForm = this.fb.group({
     description: ['', [Validators.required, Validators.minLength(6), Validators.pattern((/^[A-Za-z]+$/))]],
     newUser: [''],

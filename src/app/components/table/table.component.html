@@ -1,0 +1,34 @@
+<div class="table-container">
+<table class="table-auto w-full border-collapse">
+  <thead>
+  <tr>
+    <th *ngFor="let column of columns()"
+        class="px-4 py-2 cursor-pointer bg-gray-100 border"
+        (click)="sortBy(column)">
+      {{ column | titlecase }}
+      <span *ngIf="sortConfig().key === column && sortConfig().direction">
+          {{ sortConfig().direction === 'asc' ? '↑' : '↓' }}
+        </span>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of paginatedData();">
+    <td *ngFor="let column of columns()" class="border px-4 py-2">
+      {{ item[column] }}
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="mt-4 flex justify-center gap-2">
+  <button
+    *ngFor="let page of pageNumbers()"
+    [class.bg-primary]="page === currentPage()"
+    [class.text-white]="page === currentPage()"
+    class="px-3 py-1 border rounded"
+    (click)="changePage(page)">
+    {{ page }}
+  </button>
+</div>
+</div>

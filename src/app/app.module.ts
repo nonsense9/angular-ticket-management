@@ -32,6 +32,7 @@ import {dictionaryReducer} from "./store/reducers/dictionary.reducer";
 import {MetaReducer} from "@ngrx/store";
 import {hydrationMetaReducer} from "./store/reducers/hydration.reducer";
 import {State} from "./store/models/state.model";
+import {TableComponent} from './components/table/table.component';
 
 export const reducers: ActionReducerMap<State> = {
 // @ts-ignore
@@ -51,22 +52,23 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
         FooterComponent,
         DictionaryComponent
     ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        NgbModule,
-        CalendarModule.forRoot({
-            provide: DateAdapter,
-            useFactory: adapterFactory
-        }),
-        BrowserAnimationsModule,
-        ToastrModule.forRoot({
-            positionClass: 'toast-bottom-right',
-        }),
-        StoreModule.forRoot(reducers, {metaReducers})
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgbModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+    }),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    TableComponent
+  ],
     providers: [AuthenticationService, DictionaryService, LoadingService, {
         provide: HTTP_INTERCEPTORS,
         useClass: LoadingInterceptor,

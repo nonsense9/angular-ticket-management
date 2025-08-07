@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Renderer2} from '@angular/core';
+import { Component } from '@angular/core';
 import {LoadingService} from "./service/loader.service";
 
 @Component({
@@ -7,7 +7,6 @@ import {LoadingService} from "./service/loader.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
   constructor(public loadingService: LoadingService) {}
 
 

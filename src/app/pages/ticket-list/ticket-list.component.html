@@ -1,6 +1,6 @@
 <!--Ticket list template-->
 <ng-container *ngIf="tickets$ | async as tickets">
-  <form [formGroup]="profileForm"
+  <form [formGroup]="profileForm" class="mb-3"
         (ngSubmit)="handleAddTicket(profileForm.value.description, profileForm.value.user.name)">
     <div class="row">
       <div *ngIf="tickets.length > 0; else noTickets" class="col-lg-9">
@@ -18,7 +18,7 @@
         <h2 class="my-3">Tickets</h2>
         <ul class="p-0">
           <li *ngFor="let ticket of tickets" id="ticket-list" class="mb-2">
-            <a [routerLink]="['/tickets', ticket.id]">{{ticket.description}}</a>
+            <a [routerLink]="['/tickets', ticket.id]">{{ ticket.description }}</a>
             <button class="btn btn-primary mx-2" (click)="complete(ticket.id)" type="button">
               <i class="bi bi-check2-circle"></i>
               Complete
@@ -57,7 +57,7 @@
               <div formGroupName="user">
                 <select class="form-select" formControlName="name" id="name">
                   <option *ngFor="let user of users">
-                    <span>{{user.name}}</span>
+                    <span>{{ user.name }}</span>
                   </option>
                 </select>
               </div>
@@ -70,12 +70,14 @@
       </div>
     </div>
   </form>
+  <app-table [data]="tableData"></app-table>
+
 </ng-container>
 
 <!--No tickets in the list template-->
 <ng-template #noTickets>
   <h1>Unfortunately, there are no tickets created at this time, create
-    one</h1>
+      one</h1>
 </ng-template>
 
 <!--Loading template-->
