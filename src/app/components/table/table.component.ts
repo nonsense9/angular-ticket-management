@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, computed, effect, Input, signal } from '@angular/core';
 import { NgClass, NgForOf, NgIf, TitleCasePipe } from "@angular/common";
-import { SortConfig } from "../../models/sort";
+import { SortConfig } from "../../models/sort.interface";
 
 @Component({
   standalone: true,

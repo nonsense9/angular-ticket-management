@@ -1,5 +1,5 @@
 import {DictionaryAction, DictionaryActionType} from '../actions/dictionary.action';
-import {Dictionary} from "../../models/dictionary";
+import {Dictionary} from "../../models/dictionary.interface";
 
 const initialState: Dictionary =
     {

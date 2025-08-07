@@ -4,7 +4,7 @@ import {ToastrService} from "ngx-toastr";
 import * as randomWords from 'random-words';
 
 import {DictionaryService} from "../../service/dictionary.service";
-import {Dictionary} from "../../models/dictionary";
+import {Dictionary} from "../../models/dictionary.interface";
 import {Observable} from "rxjs";
 import {Store} from "@ngrx/store";
 
